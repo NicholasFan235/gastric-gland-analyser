@@ -9,13 +9,33 @@ class SimulationConnection:
         assert self.node_locations is not None
         self.boundary_nodes = BoundaryNodes(output_folder)
         assert self.boundary_nodes is not None
+        self.location_indices = CellLocationIndices(output_folder)
+        assert self.location_indices is not None
+
+        self.cell_ages = None
+        self.cell_ancestors = None
+        self.cell_areas = None
+        self.cell_proliferative_types = None
+        self.cell_types = None
 
     
     def recreate_timepoint(self, timepoint:float):
         self.factory = _PopulationFactory(
+            timepoint,
             self.node_locations.data_at_time(timepoint),
             self.boundary_nodes.data_at_time(timepoint),
-            timepoint)
+            self.location_indices.data_at_time(timepoint))
+        if self.cell_ages is not None:
+            self.factory.cell_ages = CellAges(self.output_folder).data_at_time(timepoint)
+        if self.cell_ancestors is not None:
+            self.factory.cell_ancestors = CellAncestors(self.output_folder).data_at_time(timepoint)
+        if self.cell_areas is not None:
+            self.factory.cell_areas = CellAreas(self.output_folder).data_at_time(timepoint)
+        if self.cell_proliferative_types is not None:
+            self.factory.cell_proliferative_types = CellProliferativeTypes(self.output_folder).data_at_time(timepoint)
+        if self.cell_types is not None:
+            self.factory.cell_types = CellTypes(self.output_folder).data_at_time(timepoint)
+        return self.factory.create_population()
         
 
 

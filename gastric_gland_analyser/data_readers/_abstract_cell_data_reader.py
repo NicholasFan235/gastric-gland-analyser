@@ -17,13 +17,14 @@ class AbstractCellDataReader:
                 assert len(line)==2
                 line[0] = float(line[0].strip())
                 line[1] = [dtype(i) for i in line[1].strip().split(' ')]
-                if group_size <= 1:
-                    self.data[line[0]] = line[1]
+                assert group_size > 0
+                if group_size == 1:
+                    self.data[line[0]] = [self.format_data(v) for v in line[1]]
                 else:
                     assert len(line[1])%group_size == 0
                     self.data[line[0]] = []
                     for i in range(0, len(line[1]), group_size):
-                        self.data[line[0]].append(line[1][i:i+group_size])
+                        self.data[line[0]].append(self.format_data(line[1][i:i+group_size]))
 
     def data_at_time(self, time:float):
         return self.data[time]
@@ -33,4 +34,7 @@ class AbstractCellDataReader:
     
     def timepoints(self):
         return self.data.keys()
+
+    def format_data(self,data):
+        return data
 

@@ -1,10 +1,10 @@
 
 from ._abstract_analyser import AbstractAnalyser
 from ..population import Population
-from helpers._calculate_foveolar_height import _calculate_foveolar_height
+from .helpers._calculate_foveolar_height import _calculate_foveolar_height
 
 
-class MaxFoveolarHeight(AbstractAnalyser):
+class FoveolarHeightTracker(AbstractAnalyser):
     def __init__(self):
         super().__init__()
 

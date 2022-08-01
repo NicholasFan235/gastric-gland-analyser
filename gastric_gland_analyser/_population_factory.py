@@ -26,6 +26,7 @@ class _PopulationFactory:
 
         for i, location_index in enumerate(self.location_indices):
             population.cells[i].location = self.node_locations[location_index]
+            population.cells[i].location_index = location_index
             assert self.boundary_nodes[location_index] == 0
 
         if self.cell_ages is not None:
@@ -37,15 +38,17 @@ class _PopulationFactory:
                 population.cells[i].ancestor = ancestor
         
         if self.cell_areas is not None:
-            for i, area in self.cell_areas:
+            for i, area in enumerate(self.cell_areas):
                 population.cells[i].area = area
 
         if self.cell_types is not None:
-            for i, cell_type in self.cell_types:
+            for i, cell_type in enumerate(self.cell_types):
                 population.cells[i].cell_type = cell_type
         
         if self.cell_proliferative_types is not None:
-            for i, proliferative_cell_type in self.cell_proliferative_types:
+            for i, proliferative_cell_type in enumerate(self.cell_proliferative_types):
                 population.cells[i].proliferative_cell_type = proliferative_cell_type
+        
+        return population
 
     

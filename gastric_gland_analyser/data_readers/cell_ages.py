@@ -8,3 +8,7 @@ class CellAges(AbstractCellDataReader):
         self.input_file = os.path.join(output_folder, 'cellages.dat')
         self.load_data(group_size=4)
     
+    def format_data(self, data):
+        assert type(data)==list
+        assert len(data)==4, f'{data}'
+        return data[-1]

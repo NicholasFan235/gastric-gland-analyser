@@ -1,14 +1,13 @@
 
 from ._abstract_analyser import AbstractAnalyser
+from .helpers._count_cells import _count_cells
 from ..population import Population
-from helpers._calculate_neck_height import _calculate_neck_height
 
-
-class NeckHeightTracker(AbstractAnalyser):
+class CellCountTracker(AbstractAnalyser):
     def __init__(self):
         super().__init__()
 
     def analyse_timepoint(self, population:Population, timepoint:float):
-        height = _calculate_neck_height(population)
+        height = _count_cells(population)
         self.result[timepoint] = height
 
