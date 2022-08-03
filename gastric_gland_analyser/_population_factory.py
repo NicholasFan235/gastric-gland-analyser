@@ -27,7 +27,7 @@ class _PopulationFactory:
         for i, location_index in enumerate(self.location_indices):
             population.cells[i].location = self.node_locations[location_index]
             population.cells[i].location_index = location_index
-            assert self.boundary_nodes[location_index] == 0
+            #assert self.boundary_nodes[location_index] == 0
 
         if self.cell_ages is not None:
             for i, age in enumerate(self.cell_ages):
