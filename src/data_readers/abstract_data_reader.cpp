@@ -1,5 +1,7 @@
 #include "abstract_data_reader.hpp"
 
+#include "../dataclasses/proliferative_cell_types.hpp"
+
 #include <sstream>
 #include <fstream>
 #include <iostream>
@@ -59,6 +61,19 @@ namespace gga
         return r;
     }
 
+    template<>
+    std::vector<ProliferativeCellType> AbstractDataReader<ProliferativeCellType>::interpretTimepoint(std::stringstream& ss)
+    {
+        std::vector<ProliferativeCellType> r = std::vector<ProliferativeCellType>();
+        int c;
+        while (ss)
+        {
+            ss >> c;
+            r.push_back(static_cast<ProliferativeCellType>(c));
+        }
+        return r;
+    }
+
     template <typename T>
     void AbstractDataReader<T>::skip()
     {
@@ -76,6 +91,7 @@ namespace gga
     template class AbstractDataReader<int>;
     template class AbstractDataReader<double>;
     template class AbstractDataReader<std::pair<double, double>>;
+    template class AbstractDataReader<ProliferativeCellType>;
 
 } // namespace gga
 

@@ -38,6 +38,47 @@ namespace gga
         return std::make_pair(timepoint, factory.population());
     }
 
+    void SimulationConnection::useAges(bool use)
+    {
+        if (use)
+            m_agesReader = std::make_shared<CellAgesReader>(m_simulationFolder);
+        else
+            m_agesReader = std::shared_ptr<CellAgesReader>();
+    }
+
+    void SimulationConnection::useAncestors(bool use)
+    {
+        if (use)
+            m_ancestorsReader = std::make_shared<CellAncestorsReader>(m_simulationFolder);
+        else
+            m_ancestorsReader = std::shared_ptr<CellAncestorsReader>();
+    }
+
+    void SimulationConnection::useAreas(bool use)
+    {
+        if (use)
+            m_areasReader = std::make_shared<CellAreasReader>(m_simulationFolder);
+        else
+            m_areasReader = std::shared_ptr<CellAreasReader>();
+    }
+
+    void SimulationConnection::useProliferativeCellTypes(bool use)
+    {
+        if (use)
+            m_proliferativeCellTypesReader = std::make_shared<ProliferativeCellTypesReader>(m_simulationFolder);
+        else
+            m_proliferativeCellTypesReader = std::shared_ptr<ProliferativeCellTypesReader>();
+    }
+
+    void SimulationConnection::useCellTypes(bool use)
+    {
+        if (use)
+            m_cellTypesReader = std::make_shared<CellTypesReader>(m_simulationFolder);
+        else
+            m_cellTypesReader = std::shared_ptr<CellTypesReader>();
+    }
+
+
     void SimulationConnection::skipTimepoint()
     {
         m_locationsReader->skip();

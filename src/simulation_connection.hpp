@@ -39,6 +39,12 @@ namespace gga
     public:
         SimulationConnection(std::filesystem::path simulationFolder);
 
+        void useAges(bool use=true);
+        void useAncestors(bool use=true);
+        void useAreas(bool use=true);
+        void useProliferativeCellTypes(bool use=true);
+        void useCellTypes(bool use=true);
+
         std::optional<std::pair<double, PopulationPtr>> nextTimepoint();
 
         void skipTimepoint();

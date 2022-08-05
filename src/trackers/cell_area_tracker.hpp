@@ -2,16 +2,16 @@
 #define GASTRIC_GLAND_ANALYSIS_TRACKERS_SMALLEST_CELL_AREA_TRACKER_HPP
 
 #include "abstract_tracker.hpp"
-
+#include "distribution_helper.hpp"
 
 namespace gga
 {
 
 
-    class SmallestCellAreaTracker : public AbstractTracker
+    class CellAreaTracker : public AbstractTracker, DistributionHelper<double>
     {
     public:
-        SmallestCellAreaTracker(std::filesystem::path outputFolder);
+        CellAreaTracker(std::filesystem::path outputFolder);
 
         void analyseTimepoint(Population& population, double timepoint) override;
 
@@ -20,7 +20,7 @@ namespace gga
 
     };
 
-    typedef std::shared_ptr<SmallestCellAreaTracker> SmallestCellAreaTrackerPtr;
+    typedef std::shared_ptr<CellAreaTracker> CellAreaTrackerPtr;
 
 } // namespace gga
 

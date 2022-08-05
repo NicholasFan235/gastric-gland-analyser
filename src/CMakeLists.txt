@@ -6,12 +6,15 @@ set(
     gga_src
     dataclasses/population.cpp
     trackers/abstract_tracker.cpp
+    trackers/distribution_helper.cpp
     trackers/cell_count_tracker.cpp
     trackers/foveolar_height_tracker.cpp
-    trackers/neck_cell_count_tracker.cpp
     trackers/neck_height_tracker.cpp
-    trackers/smallest_cell_area_tracker.cpp
-    trackers/smallest_neck_cell_area_tracker.cpp
+    trackers/neck_cell_count_tracker.cpp
+    trackers/foveolar_cell_count_tracker.cpp
+    trackers/cell_area_tracker.cpp
+    trackers/neck_cell_area_tracker.cpp
+    trackers/foveolar_cell_area_tracker.cpp
     analyser.cpp
     simulation_connection.cpp
     population_factory.cpp
@@ -35,12 +38,15 @@ set(
     simulation_connection.hpp
     population_factory.hpp
     trackers/abstract_tracker.hpp
+    trackers/distribution_helper.hpp
     trackers/cell_count_tracker.hpp
-    trackers/foveolar_height_tracker.hpp
     trackers/neck_cell_count_tracker.hpp
+    trackers/foveolar_cell_count_tracker.hpp
+    trackers/foveolar_height_tracker.hpp
     trackers/neck_height_tracker.hpp
-    trackers/smallest_cell_area_tracker.hpp
-    trackers/smallest_neck_cell_area_tracker.hpp
+    trackers/cell_area_tracker.hpp
+    trackers/neck_cell_area_tracker.hpp
+    trackers/foveolar_cell_area_tracker.hpp
     data_readers/abstract_data_reader.hpp
     data_readers/boundary_nodes_reader.hpp
     data_readers/cell_ages_reader.hpp

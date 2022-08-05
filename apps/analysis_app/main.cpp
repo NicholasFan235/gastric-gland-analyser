@@ -4,9 +4,11 @@
 #include "trackers/cell_count_tracker.hpp"
 #include "trackers/foveolar_height_tracker.hpp"
 #include "trackers/neck_cell_count_tracker.hpp"
+#include "trackers/foveolar_cell_count_tracker.hpp"
 #include "trackers/neck_height_tracker.hpp"
-#include "trackers/smallest_cell_area_tracker.hpp"
-#include "trackers/smallest_neck_cell_area_tracker.hpp"
+#include "trackers/cell_area_tracker.hpp"
+#include "trackers/neck_cell_area_tracker.hpp"
+#include "trackers/foveolar_cell_area_tracker.hpp"
 
 #include <exception>
 #include <string>
@@ -23,20 +25,28 @@ void analyse_experiment(std::filesystem::path simulationFolder)
         throw std::runtime_error("\"" + simulationFolder.string() + "\" is not a directory");
 
     std::filesystem::path outputFolder = 
-        simulationFolder.parent_path() / (simulationFolder.stem().string() + "_analysis");
+        simulationFolder.parent_path() / ("analysis_" + simulationFolder.stem().string());
     std::cout << "Analysing " << simulationFolder << ", writing outputs to " << outputFolder << std::endl;
     std::filesystem::create_directory(outputFolder);
 
     SimulationConnectionPtr simulationConnection =
         std::make_shared<SimulationConnection>(simulationFolder);
+    simulationConnection->useAges();
+    simulationConnection->useAncestors();
+    simulationConnection->useAreas();
+    simulationConnection->useProliferativeCellTypes();
+    simulationConnection->useCellTypes();
+
     AnalyserPtr analyser = std::make_shared<Analyser>(simulationConnection);
 
     analyser->addTracker(std::make_shared<CellCountTracker>(outputFolder));
     analyser->addTracker(std::make_shared<FoveolarHeightTracker>(outputFolder));
     analyser->addTracker(std::make_shared<NeckCellCountTracker>(outputFolder));
+    analyser->addTracker(std::make_shared<FoveolarCellCountTracker>(outputFolder));
     analyser->addTracker(std::make_shared<NeckHeightTracker>(outputFolder));
-    analyser->addTracker(std::make_shared<SmallestCellAreaTracker>(outputFolder));
-    analyser->addTracker(std::make_shared<SmallestNeckCellAreaTracker>(outputFolder));
+    analyser->addTracker(std::make_shared<CellAreaTracker>(outputFolder));
+    analyser->addTracker(std::make_shared<NeckCellAreaTracker>(outputFolder));
+    analyser->addTracker(std::make_shared<FoveolarCellAreaTracker>(outputFolder));
 
     analyser->analyse();
 }

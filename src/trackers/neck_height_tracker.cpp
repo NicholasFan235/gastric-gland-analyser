@@ -14,7 +14,7 @@ namespace gga
 
     void NeckHeightTracker::writeHeader()
     {
-        m_ofs << "t,neck_height";
+        m_ofs << "t,neck_height" << std::endl;
     }
 
     void NeckHeightTracker::analyseTimepoint(Population& population, double timepoint)
@@ -24,7 +24,7 @@ namespace gga
         for (const Cell& cell : population.cells())
         {
             if (cell.proliferativeCelltype != ProliferativeCellType::Neck) continue;
-            lowest = std::min(lowest, cell.location.first);
+            lowest = std::min(lowest, cell.location.second);
             highest = std::max(highest, cell.location.second);
         }
         m_ofs << timepoint << "," << std::max(0.0, highest-lowest) << std::endl;
