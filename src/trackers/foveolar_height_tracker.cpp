@@ -7,7 +7,7 @@ namespace gga
 {
 
     FoveolarHeightTracker::FoveolarHeightTracker(std::filesystem::path outputFolder) :
-        AbstractTracker(outputFolder / "fovelar_height.csv")
+        AbstractTracker(outputFolder / "foveolar_height.csv")
     {
         writeHeader();
     }

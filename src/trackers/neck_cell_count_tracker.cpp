@@ -20,8 +20,7 @@ namespace gga
 
     void NeckCellCountTracker::analyseTimepoint(Population& population, double timepoint)
     {
-        unsigned n_cells = 0;
-        std::count_if(population.cells().cbegin(), population.cells().cend(),
+        unsigned n_cells = std::count_if(population.cells().cbegin(), population.cells().cend(),
             [](const Cell& cell)
             { return cell.proliferativeCelltype == ProliferativeCellType::Neck; });
         m_ofs << timepoint << "," << n_cells << std::endl;

@@ -29,9 +29,9 @@ namespace gga
         double timepoint;
         ss >> timepoint;
         if (expected_timepoint.value_or(timepoint) != timepoint)
-            std::throw_with_nested("Error reading data at timepoint " + std::to_string(timepoint)
+            std::throw_with_nested(std::runtime_error("Error reading data at timepoint " + std::to_string(timepoint)
             + "\n    Expected " + std::to_string(expected_timepoint.value()) 
-            + " got " + std::to_string(timepoint));
+            + " got " + std::to_string(timepoint)));
         return std::make_pair(timepoint, interpretTimepoint(ss));
     }
 
